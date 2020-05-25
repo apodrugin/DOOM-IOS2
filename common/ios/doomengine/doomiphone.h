@@ -129,7 +129,6 @@ extern "C" {
 
 // new iphone code
 #include "ipak.h"
-#include "iphone_email.h" //gsh, adds support for emailing the console to id
     
 #ifdef __cplusplus
 }

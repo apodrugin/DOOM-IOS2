@@ -30,37 +30,24 @@
 #include "doomiphone.h"
 
 void Com_Printf( const char *fmt, ... ) {
-	va_list		argptr;
+	va_list argptr;
 	
 	va_start( argptr, fmt );
-	
-	//gsh, send output to the console buffer
-	char buffer[1024];
-	vsnprintf( buffer, sizeof( buffer ), fmt, argptr );
-	AppendConsoleBuffer(buffer);
 	
 	vprintf( fmt, argptr );
 	va_end( argptr );
 }
 
 void Com_Error( const char *fmt, ... ) {
-	va_list		argptr;
+	va_list argptr;
 	
 	va_start( argptr, fmt );
-	
-	//gsh, send output to the console buffer
-	char buffer[1024];
-	vsnprintf( buffer, sizeof( buffer ), fmt, argptr );
-	AppendConsoleBuffer(buffer);
 	
 	vprintf( fmt, argptr );
 	va_end( argptr );
 	
-	//gsh, email the console to id
-	EmailConsole();
-	
 	// drop into the editor
-	abort(); 
+	abort();
 	exit( 1 );
 }
 
