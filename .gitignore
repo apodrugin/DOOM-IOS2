@@ -1,0 +1,8 @@
+.DS_Store
+*.pbxuser
+*.orig
+xcuserdata
+*.xcuserstate
+*.xcbkptlist
+*.xcworkspacedata
+*.git
