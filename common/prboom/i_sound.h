@@ -58,25 +58,25 @@ void I_ShutdownSound(void);
 void I_SetChannels(void);
 
 // Get raw data lump index for sound descriptor.
-int I_GetSfxLumpNum (sfxinfo_t *sfxinfo);
+long I_GetSfxLumpNum (sfxinfo_t *sfxinfo);
 
 // Starts a sound in a particular sound channel.
 int I_StartSound(int id, int channel, int vol, int sep, int pitch, int priority);
 
 // Stops a sound channel.
-void I_StopSound(int handle);
+void I_StopSound(long handle);
 
 // Called by S_*() functions
 //  to see if a channel is still playing.
 // Returns 0 if no longer playing, 1 if playing.
-boolean I_SoundIsPlaying(int handle);
+boolean I_SoundIsPlaying(long handle);
 
 // Called by m_menu.c to let the quit sound play and quit right after it stops
 boolean I_AnySoundStillPlaying(void);
 
 // Updates the volume, separation,
 //  and pitch of a sound channel.
-void I_UpdateSoundParams(int handle, int vol, int sep, int pitch);
+void I_UpdateSoundParams(long handle, int vol, int sep, int pitch);
 
 //
 //  MUSIC I/O

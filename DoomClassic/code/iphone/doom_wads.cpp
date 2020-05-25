@@ -18,8 +18,6 @@
  
  */
 
-#include <cstddef>
-
 #include "doom_wads.h"
 #include "stdio.h"
 #include "iphone_doom.h"

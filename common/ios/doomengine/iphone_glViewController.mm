@@ -83,12 +83,11 @@ static bool inTransition = false;
 
 /*
 ========================
-shouldAutorotateToInterfaceOrientation
+supportedInterfaceOrientations
 ========================
 */
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-	// Return YES for supported orientations.
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
 }
 
 /*
@@ -113,15 +112,6 @@ shouldAutorotateToInterfaceOrientation
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-}
-
-/*
- ========================
- viewDidUnload
- ========================
- */
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 /*

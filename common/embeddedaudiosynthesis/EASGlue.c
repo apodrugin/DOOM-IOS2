@@ -37,8 +37,8 @@ static EAS_BOOL EASLibraryCheck (const S_EAS_LIB_CONFIG *pLibConfig);
 
 static EAS_DATA_HANDLE pEASData;
 static const S_EAS_LIB_CONFIG *pLibConfig;
-static int polyphony;
-static int bufferSize;
+static long polyphony;
+static long bufferSize;
 
 static EAS_FILE file;
 static EAS_HANDLE handle;

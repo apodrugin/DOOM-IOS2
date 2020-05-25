@@ -30,7 +30,7 @@
  ========================
  */
 - (void)awakeFromNib {
-    
+    [super awakeFromNib];
     [ self SetupLabel:@"idGinza Narrow" ];
 }
 

@@ -21,11 +21,18 @@
 #import "iphone_delegate.h"
 
 #import <AudioToolbox/AudioServices.h>
+#import <CoreMotion/CoreMotion.h>
 #include "doomiphone.h"
 #include "iphone_common.h"
 #include "ios/InAppStore.h"
 #include "ios/GameCenter.h"
 
+
+@interface iphoneApp()
+
+@property (nonatomic, strong) CMMotionManager *motionManager;
+
+@end
 
 
 @implementation iphoneApp
@@ -47,7 +54,6 @@ const static float ACCELEROMETER_UPDATE_INTERVAL = 1.0f / FRAME_HERTZ;
  ========================
  */
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    
     gAppDelegate = self;
     inBackgroundProcess = false;
 	hasPushedGLView = NO;
@@ -60,11 +66,24 @@ const static float ACCELEROMETER_UPDATE_INTERVAL = 1.0f / FRAME_HERTZ;
     
     // Initial Application Style config.
     [ application setStatusBarHidden: YES ];
-	
-	// start the flow of accelerometer events
-	UIAccelerometer *accelerometer = [UIAccelerometer sharedAccelerometer];
-    [ accelerometer setDelegate: self ];
-    [ accelerometer setUpdateInterval: ACCELEROMETER_UPDATE_INTERVAL ];
+    
+    self.motionManager = [CMMotionManager new];
+    if ([self.motionManager isAccelerometerAvailable]) {
+        // start the flow of accelerometer events
+        [self.motionManager setAccelerometerUpdateInterval:ACCELEROMETER_UPDATE_INTERVAL];
+        [self.motionManager
+         startAccelerometerUpdatesToQueue:[NSOperationQueue mainQueue]
+         withHandler:^(CMAccelerometerData *accelerometerData, NSError *error)
+         {
+            float acc[4];
+            acc[0] = accelerometerData.acceleration.x;
+            acc[1] = accelerometerData.acceleration.y;
+            acc[2] = accelerometerData.acceleration.z;
+            acc[3] = accelerometerData.timestamp;
+
+            iphoneTiltEvent( acc );
+        }];
+    }
     
     [self InitializeInterfaceBuilder ];
 
@@ -140,23 +159,6 @@ const static float ACCELEROMETER_UPDATE_INTERVAL = 1.0f / FRAME_HERTZ;
 - (void)dealloc {
 	[window release];
 	[super dealloc];
-}
-
-/*
- ========================
- accelerometer 
- ========================
- */
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration
-{	
-	float acc[4];
-	acc[0] = acceleration.x;
-	acc[1] = acceleration.y;
-	acc[2] = acceleration.z;
-	acc[3] = acceleration.timestamp;
-    
-    
-	iphoneTiltEvent( acc );
 }
 
 /*

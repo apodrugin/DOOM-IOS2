@@ -29,7 +29,7 @@ char	consoleCommand[1024];
 int SysIphoneMicroseconds() {
 	struct timeval tp;
 	struct timezone tzp;
-	static int		secbase;
+	static long secbase;
 	
 	gettimeofday( &tp, &tzp );
 	
@@ -38,9 +38,9 @@ int SysIphoneMicroseconds() {
 		return tp.tv_usec;
 	}
 	
-	int curtime = (tp.tv_sec - secbase) * 1000000 + tp.tv_usec;
+	long curtime = (tp.tv_sec - secbase) * 1000000 + tp.tv_usec;
 	
-	return curtime;
+	return (int)curtime;
 }
 
 int SysIphoneMilliseconds() {

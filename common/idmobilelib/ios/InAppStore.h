@@ -50,7 +50,9 @@ the application can get the price information and actually initiate purchases of
 
 #include <vector>
 #include <string>
-#include <tr1/functional>
+#include <functional>
+
+@class SKProduct;
 
 namespace idInAppStore {
 	
@@ -70,8 +72,8 @@ namespace idInAppStore {
 	
 	std::string GetLocalizedPrice( const char * const productIdentifier );
 	
-	void StartPurchase( const char * const productIdentifier );
-	
+    void StartPurchase( SKProduct * product );
+    
 	/*
 	========================
 	The application can register callbacks to be notified of events that occur relating to
@@ -85,7 +87,7 @@ namespace idInAppStore {
 		PRODUCT_STATUS_PURCHASED
 	};
 	
-	typedef std::tr1::function< void ( const char * const, productStatus_t ) > callback_t;
+	typedef std::function< void ( const char * const, productStatus_t ) > callback_t;
 	
 	void SetCallback( callback_t callback );
 	void ClearCallback();

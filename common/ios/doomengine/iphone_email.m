@@ -35,7 +35,7 @@
 
 
 char *consoleBuffer = NULL;	//buffer for the console output
-int size = 0;
+size_t size = 0;
 
 /*
  *	ReplaceAt()
@@ -43,8 +43,8 @@ int size = 0;
  */
 void ReplaceAt( char *oldString, const char *insertString, int location)
 {
-	int length = strlen(oldString);
-	int chunkLength = strlen(insertString);
+	size_t length = strlen(oldString);
+	size_t chunkLength = strlen(insertString);
 	
 	char *newString = malloc(length + chunkLength + 1);//the 1 includes space for the null terminating character
 	
@@ -90,7 +90,7 @@ void ReplaceAt( char *oldString, const char *insertString, int location)
  */
 void AppendBuffer(const char *buf)
 {	
-	int length = strlen(buf) + 1; //strlen doesn't include the null terminating character
+	size_t length = strlen(buf) + 1; //strlen doesn't include the null terminating character
 	char *temp = malloc(length);
 	strcpy(temp, buf);
 	
