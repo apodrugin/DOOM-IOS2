@@ -63,5 +63,4 @@ void DisplayNSErrorMessage( NSString * title, NSError * error ) {
         message:messageString delegate:nil
         cancelButtonTitle:idLocalization_GetNSString(@"OK") otherButtonTitles:nil];
     [alertView show];
-    [alertView release];
 }

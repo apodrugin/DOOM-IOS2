@@ -37,6 +37,5 @@ void ShowSystemAlert( const std::string & title, const std::string & message ) {
 	UIAlertView * alert = [[UIAlertView alloc] initWithTitle:nsTitle message:nsMessage delegate:nil cancelButtonTitle:nsCancelButton otherButtonTitles:nil];
 
 	[alert show];
-	[alert release];
 }
 

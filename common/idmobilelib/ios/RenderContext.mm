@@ -69,8 +69,6 @@ idRenderContext::~idRenderContext() {
 	mViewRenderbuffer = 0;
 	glDeleteRenderbuffersOES( 1, &mDepthRenderbuffer );
 	mDepthRenderbuffer = 0;
-    
-    [ mEAGLContext release ];
 }
 
 /*

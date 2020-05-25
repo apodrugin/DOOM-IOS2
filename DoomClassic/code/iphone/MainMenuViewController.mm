@@ -215,7 +215,6 @@
 	
 	
     [self.navigationController pushViewController:vc animated:NO];
-    [vc release];
     
     Sound_StartLocalSound( "iphone/baborted_01.wav" );
     
@@ -277,7 +276,6 @@
 	}
 	
     [self.navigationController pushViewController:vc animated:NO];
-    [vc release];
     
     Sound_StartLocalSound( "iphone/baborted_01.wav" );
 }
@@ -311,7 +309,6 @@
 	
 	
     [self.navigationController pushViewController:vc animated:NO];
-    [vc release];
     
     Sound_StartLocalSound( "iphone/baborted_01.wav" );
 }
@@ -358,7 +355,6 @@
 	}
 	
     [self.navigationController pushViewController:vc animated:NO];
-    [vc release];
 
     Sound_StartLocalSound( "iphone/baborted_01.wav" );
     
@@ -381,7 +377,6 @@
 	}
 	
      [self.navigationController pushViewController:vc animated:NO];
-     [vc release];
     
     Sound_StartLocalSound( "iphone/baborted_01.wav" );
 }

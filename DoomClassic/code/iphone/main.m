@@ -42,9 +42,10 @@ int main(int argc, char *argv[]) {
 		iphoneAppDirectory[0] = 0;
 	}
 	
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    NSString * classString = NSStringFromClass([DoomApp class]);
-    int retVal = UIApplicationMain(argc, argv, nil, classString );
-    [pool release];
-    return retVal;
+    @autoreleasepool {
+        NSString * classString = NSStringFromClass([DoomApp class]);
+        int retVal = UIApplicationMain(argc, argv, nil, classString );
+        
+        return retVal;
+    }
 }

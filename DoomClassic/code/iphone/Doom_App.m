@@ -38,7 +38,6 @@
     // Create a Navigation Controller for Pushing/Popping Views.
     navigationController = [[MainNavController alloc] initWithRootViewController:rootController];
     [navigationController setNavigationBarHidden:YES];
-    [rootController release];
     
     // Create the OpenGLView so that our context is created. Don't push it on yet though.
 	if ( IS_IPHONE_5 ) {

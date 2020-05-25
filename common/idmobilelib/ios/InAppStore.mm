@@ -276,7 +276,6 @@ namespace idInAppStore {
 	========================
 	*/
 	void Shutdown() {
-		[observer release];
 		observer = nil;
 	}
 	
@@ -361,7 +360,6 @@ namespace idInAppStore {
 			
 			// Make sure the alert shows up on the main thread.
 			[alert show];
-			[alert release];
 		}
 	}
 		
@@ -481,7 +479,6 @@ namespace idInAppStore {
 										  otherButtonTitles:nil];
 	
 	[alert show];
-	[alert release];
 }
 
 /*
@@ -548,9 +545,6 @@ Called by the OS when the application gets product information about an In-App P
 			callbackObject( identifierString.c_str(), idInAppStore::PRODUCT_STATUS_RECEIVED_INFORMATION );
 		}
 	}
-	
-	[numberFormatter release];
-    [request autorelease];
 }
 
 /*
@@ -626,7 +620,6 @@ Called by updatedTransactions when a request fails.
 											  otherButtonTitles:nil];
 		
 		[alert show];
-		[alert release];
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
 	

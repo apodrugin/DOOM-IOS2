@@ -107,7 +107,6 @@
 	
     [self.navigationController pushViewController:vc animated:NO];
     [vc setEpisode:episodeSelection ];
-    [vc release];
     
     Sound_StartLocalSound( "iphone/controller_down_01_SILENCE.wav" );
 }

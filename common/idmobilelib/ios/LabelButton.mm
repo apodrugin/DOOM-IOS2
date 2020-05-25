@@ -196,8 +196,6 @@
 - (void) dealloc {
     label = nil;
     label2 = nil;
-    
-    [super dealloc];
 }
 
 @end

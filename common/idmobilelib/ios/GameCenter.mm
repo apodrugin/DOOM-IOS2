@@ -139,9 +139,6 @@ The Objective-C delegate required for implementing Game Kit matches.
 @end
 
 
-static MatchDelegate * sharedMatchDelegateInstance = nil;
-
-
 
 // Unnamed-namespace for internal-linkage definitions.
 namespace {
@@ -180,51 +177,19 @@ the delegate might as well be a singleton. This is Apple's idiomatic example of 
 in Objective-C.
 ========================
 */
-+ (MatchDelegate*)sharedMatchDelegate
-{
-    if (sharedMatchDelegateInstance == nil) {
-        sharedMatchDelegateInstance = [[super allocWithZone:NULL] init];
-		sharedMatchDelegateInstance->matchHandler = NULL;
-		sharedMatchDelegateInstance->matchHasStarted = NO;
-		sharedMatchDelegateInstance->currentMatch = nil;
-		
-    }
++ (MatchDelegate*)sharedMatchDelegate {
+    static dispatch_once_t onceToken;
+    static MatchDelegate * sharedMatchDelegateInstance = nil;
+    
+    dispatch_once(&onceToken, ^{
+        sharedMatchDelegateInstance = [self new];
+        sharedMatchDelegateInstance->matchHandler = NULL;
+        sharedMatchDelegateInstance->matchHasStarted = NO;
+        sharedMatchDelegateInstance->currentMatch = nil;
+    });
+    
     return sharedMatchDelegateInstance;
 }
- 
-+ (id)allocWithZone:(NSZone *)zone
-{
-	(void)zone;
-    return [[self sharedMatchDelegate] retain];
-}
- 
-- (id)copyWithZone:(NSZone *)zone
-{
-	(void)zone;
-    return self;
-}
- 
-- (id)retain
-{
-    return self;
-}
- 
-- (NSUInteger)retainCount
-{
-    return NSUIntegerMax;  //denotes an object that cannot be released
-}
- 
-- (oneway void)release
-{
-    //do nothing
-}
- 
-- (id)autorelease
-{
-    return self;
-}
-
-
 
 /*
 ========================
@@ -569,9 +534,12 @@ void AuthenticateLocalPlayer( id currentViewController, idGameCenterMatchHandler
 	}
 
 	GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    __weak GKLocalPlayer *weakLocalPlayer = localPlayer;
     
     localPlayer.authenticateHandler = ^(__unused UIViewController *viewController, NSError *error) {
-		if ( localPlayer.isAuthenticated )
+        GKLocalPlayer *strongLocalPlayer = weakLocalPlayer;
+        
+		if ( strongLocalPlayer.isAuthenticated )
 		{
 			// Perform additional tasks for the authenticated player.
 			GKLocalPlayer * lp = [GKLocalPlayer localPlayer];
@@ -587,10 +555,10 @@ void AuthenticateLocalPlayer( id currentViewController, idGameCenterMatchHandler
 			}
 			 
 			playerIdentifier = newPlayerIdentifier;
-            [localPlayer registerListener:[PlayerListener sharedListener]];
+            [strongLocalPlayer registerListener:[PlayerListener sharedListener]];
             
             [[PlayerListener sharedListener] addInviteHandler:^(GKPlayer *player, GKInvite *invite) {
-                if (localPlayer != player) {
+                if (weakLocalPlayer != player) {
                     return;
                 }
                 
@@ -598,13 +566,13 @@ void AuthenticateLocalPlayer( id currentViewController, idGameCenterMatchHandler
                 idGameCenter::DisconnectFromMatch();
                 ConfigureDelegate( MATCH_VIEW_MODAL, currentViewController, handler );
                 
-                GKMatchmakerViewController *mmvc = [[[GKMatchmakerViewController alloc] initWithInvite:invite] autorelease];
+                GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithInvite:invite];
                 mmvc.matchmakerDelegate = [MatchDelegate sharedMatchDelegate];
                 [currentViewController presentViewController:mmvc animated:YES completion:nil];
             }];
             
             [[PlayerListener sharedListener] addDidRequestMatchHandler:^(GKPlayer *player, NSArray<GKPlayer *> *recipientPlayers) {
-                if (localPlayer != player) {
+                if (weakLocalPlayer != player) {
                     return;
                 }
                 
@@ -612,12 +580,12 @@ void AuthenticateLocalPlayer( id currentViewController, idGameCenterMatchHandler
                 idGameCenter::DisconnectFromMatch();
                 ConfigureDelegate( MATCH_VIEW_MODAL, currentViewController, handler );
                 
-                GKMatchRequest *request = [[[GKMatchRequest alloc] init] autorelease];
+                GKMatchRequest *request = [[GKMatchRequest alloc] init];
                 request.minPlayers = 2;
                 request.maxPlayers = 4;
                 request.recipients = recipientPlayers;
 
-                GKMatchmakerViewController *mmvc = [[[GKMatchmakerViewController alloc] initWithMatchRequest:request] autorelease];
+                GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
                 mmvc.matchmakerDelegate = [MatchDelegate sharedMatchDelegate];
                 [currentViewController presentViewController:mmvc animated:YES completion:nil];
             }];
@@ -681,12 +649,12 @@ void PresentMatchmaker( id currentViewController, matchParms_t parms, idGameCent
 	ConfigureDelegate( MATCH_VIEW_MODAL, currentViewController, handler );
 	
 	
-	GKMatchRequest *request = [[[GKMatchRequest alloc] init] autorelease];
+	GKMatchRequest *request = [[GKMatchRequest alloc] init];
     request.minPlayers = parms.minimumPlayers;
     request.maxPlayers = parms.maximumPlayers;
 	request.playerGroup = parms.automatchGroup;
  
-    GKMatchmakerViewController *mmvc = [[[GKMatchmakerViewController alloc] initWithMatchRequest:request] autorelease];
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
     mmvc.matchmakerDelegate = [MatchDelegate sharedMatchDelegate];
  
     [(UIViewController*)currentViewController presentViewController:mmvc animated:YES completion:nil];
@@ -709,12 +677,12 @@ void PushMatchmakerToNavigationController( id navigationController,
 	
 	ConfigureDelegate( MATCH_VIEW_PUSH_TO_NAVIGATION_CONTROLLER, nil, handler );
 	
-	GKMatchRequest *request = [[[GKMatchRequest alloc] init] autorelease];
+	GKMatchRequest *request = [[GKMatchRequest alloc] init];
     request.minPlayers = parms.minimumPlayers;
     request.maxPlayers = parms.maximumPlayers;
 	request.playerGroup = parms.automatchGroup;
  
-    GKMatchmakerViewController *mmvc = [[[GKMatchmakerViewController alloc] initWithMatchRequest:request] autorelease];
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
     mmvc.matchmakerDelegate = [MatchDelegate sharedMatchDelegate];
  
     [navigationController pushViewController:mmvc animated:YES];

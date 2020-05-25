@@ -58,7 +58,7 @@ void idLocalization_SetLanguage( ID_LANGUAGE language ) {
             break;
     }
     
-    mCurrentBundle = [[NSBundle bundleWithPath:langPath] retain ]; 
+    mCurrentBundle = [NSBundle bundleWithPath:langPath];
 }
 
 
@@ -82,7 +82,7 @@ void idLocalization_Initialize() {
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSArray* languages = [defaults objectForKey:@"AppleLanguages"];
-    NSString* current  = [[languages objectAtIndex:0] retain ];
+    NSString* current  = [languages objectAtIndex:0];
     mCurrentLanguageStr = [current UTF8String];
     
     if([current isEqualToString:@"en"]){
