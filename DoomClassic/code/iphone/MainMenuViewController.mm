@@ -44,6 +44,8 @@
  ========================
  */
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     isHidden = YES;
     
     char full_iwad[1024]; 
@@ -170,20 +172,6 @@
 
 /*
  ========================
- MainMenuViewController::viewDidUnload
- ========================
- */
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
-
-/*
- ========================
  MainMenuViewController::ResumeGamePressed
  ========================
  */
@@ -229,34 +217,34 @@
     
 	
 	//ShowMatchmaker( self, 2, 4 );
-	return;
-	
-    // Go to the MP Menu.
-    // get the address for the local service, which may
-    // start up a bluetooth personal area network
-    //bool serverResolved = ResolveNetworkServer( &netServer.address );
-    
-    // open our socket now that the network interfaces have been configured
-    // Explicitly open on interface 1, which is en0.  If bluetooth ever starts
-    // working better, we can handle multiple interfaces.
-    if ( gameSocket <= 0 ) {
-        gameSocket = UDPSocket( "en0", DOOM_PORT );
-    }
-    
-	/*
-    // get the address for the local service
-    if ( !serverResolved ) {
-        // nobody else is acting as a server, so start one here
-        RegisterGameService();
-        SetupEmptyNetGame();
-    }
-	*/	
-	
-    menuState = IPM_MULTIPLAYER;
-    
-    [gAppDelegate ShowGLView];
-    
-    Sound_StartLocalSound( "iphone/baborted_01.wav" );
+//	return;
+//	
+//    // Go to the MP Menu.
+//    // get the address for the local service, which may
+//    // start up a bluetooth personal area network
+//    //bool serverResolved = ResolveNetworkServer( &netServer.address );
+//    
+//    // open our socket now that the network interfaces have been configured
+//    // Explicitly open on interface 1, which is en0.  If bluetooth ever starts
+//    // working better, we can handle multiple interfaces.
+//    if ( gameSocket <= 0 ) {
+//        gameSocket = UDPSocket( "en0", DOOM_PORT );
+//    }
+//    
+//	/*
+//    // get the address for the local service
+//    if ( !serverResolved ) {
+//        // nobody else is acting as a server, so start one here
+//        RegisterGameService();
+//        SetupEmptyNetGame();
+//    }
+//	*/	
+//	
+//    menuState = IPM_MULTIPLAYER;
+//    
+//    [gAppDelegate ShowGLView];
+//    
+//    Sound_StartLocalSound( "iphone/baborted_01.wav" );
     
 }
 

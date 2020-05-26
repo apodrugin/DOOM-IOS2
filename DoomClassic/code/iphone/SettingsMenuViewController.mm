@@ -79,18 +79,6 @@
 
 /*
  ========================
- Doom_SettingsMenuViewController::viewDidUnload
- ========================
- */
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-/*
- ========================
  Doom_SettingsMenuViewController::BackToMain
  ========================
  */
@@ -133,7 +121,7 @@
  ========================
  */
 - (IBAction) AutoUseChanged {
-    Cvar_SetValue( autoUse->name, !autoUse->value );
+    Cvar_SetValue( autoUse->name, !((BOOL)autoUse->value) );
 }
 
 /*
@@ -142,7 +130,7 @@
  ========================
  */
 - (IBAction) StatusBarChanged {
-    Cvar_SetValue( statusBar->name, !statusBar->value );
+    Cvar_SetValue( statusBar->name, !((BOOL)statusBar->value) );
 }
 
 /*
@@ -151,7 +139,7 @@
  ========================
  */
 - (IBAction) TouchClickChanged {
-    Cvar_SetValue( touchClick->name, !touchClick->value );
+    Cvar_SetValue( touchClick->name, !((BOOL)touchClick->value) );
 }
 
 /*
@@ -160,7 +148,7 @@
  ========================
  */
 - (IBAction) TextMessagesChanged {
-    Cvar_SetValue( messages->name, !messages->value );
+    Cvar_SetValue( messages->name, !((BOOL)messages->value) );
 }
 
 /*
@@ -169,7 +157,7 @@
  ========================
  */
 - (IBAction) DrawControlsChanged {
-    Cvar_SetValue( drawControls->name, !drawControls->value );
+    Cvar_SetValue( drawControls->name, !((BOOL)drawControls->value) );
 }
 extern int mus_pause_opt; // From m_misc.c
 extern bool mus_on;
@@ -181,8 +169,8 @@ extern bool mus_on;
  */
 - (IBAction) MusicChanged {
     if ( !SysIPhoneOtherAudioIsPlaying() ) {
-        Cvar_SetValue( music->name, !music->value );
-        if ( music->value ) {
+        Cvar_SetValue( music->name, !((BOOL)music->value) );
+        if ( (BOOL)music->value ) {
 			mus_on = true;
 			mus_pause_opt = 1;
 			S_ResumeSound();
@@ -201,7 +189,7 @@ extern bool mus_on;
  ========================
  */
 - (IBAction) CenterSticksChanged {
-    Cvar_SetValue( centerSticks->name, !centerSticks->value );
+    Cvar_SetValue( centerSticks->name, !((BOOL)centerSticks->value) );
 }
 
 /*
@@ -210,7 +198,7 @@ extern bool mus_on;
  ========================
  */
 - (IBAction) RampTurnChanged {
-    Cvar_SetValue( rampTurn->name, !rampTurn->value );
+    Cvar_SetValue( rampTurn->name, !((BOOL)rampTurn->value) );
 }
 
 @end

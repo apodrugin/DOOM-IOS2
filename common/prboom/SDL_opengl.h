@@ -39,7 +39,7 @@ void glTexCoord2i( GLint s, GLint t );
 void glTexCoord2f( GLfloat s, GLfloat t );
 void glTexCoord2fv( GLfloat *st );
 
-void glEnd();
+void glEnd(void);
 
 // Doom just uses state color for all draw calls, setting it once
 // before a glBegin, rather than setting it each vertex, so we

@@ -140,18 +140,6 @@
 
 /*
  ========================
- Doom_ControlsMenuViewController::viewDidUnload
- ========================
- */
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-/*
- ========================
  Doom_ControlsMenuViewController::SetupSlider
  ========================
  */
@@ -298,7 +286,7 @@
 		Cvar_SetValue( tiltMove->name, 0 );
         tiltMoveSpeed.value = tiltMove->value;
 	}
-	if ( tiltMove->value ) {
+	if ( (BOOL)tiltMove->value ) {
 		Cvar_SetValue( tiltTurn->name, 0 );
         tiltTurnSpeed.value = tiltTurn->value;
 	}
@@ -319,7 +307,7 @@
 		Cvar_SetValue( tiltTurn->name, 0 );
         tiltTurnSpeed.value = tiltTurn->value;
 	}
-	if ( tiltTurn->value ) {
+	if ( (BOOL)tiltTurn->value ) {
 		Cvar_SetValue( tiltMove->name, 0 );
         tiltMoveSpeed.value = tiltMove->value;
 	}
