@@ -246,8 +246,8 @@ static void P_LoadVertexes (int lump)
   // internal representation as fixed.
   for (i=0; i<numvertexes; i++)
     {
-      vertexes[i].x = SHORT(data[i].x)<<FRACBITS;
-      vertexes[i].y = SHORT(data[i].y)<<FRACBITS;
+      vertexes[i].x = INT16(data[i].x)<<FRACBITS;
+      vertexes[i].y = INT16(data[i].y)<<FRACBITS;
     }
 
   // Free buffer memory.
@@ -300,8 +300,8 @@ static void P_LoadVertexes2(int lump, int gllump)
 
       for (i = firstglvertex; i < numvertexes; i++)
       {
-        vertexes[i].x = SHORT(ml->x)<<FRACBITS;
-        vertexes[i].y = SHORT(ml->y)<<FRACBITS;
+        vertexes[i].x = INT16(ml->x)<<FRACBITS;
+        vertexes[i].y = INT16(ml->y)<<FRACBITS;
         ml++;
       }
     }
@@ -312,8 +312,8 @@ static void P_LoadVertexes2(int lump, int gllump)
 
   for (i=0; i < firstglvertex; i++)
   {
-    vertexes[i].x = SHORT(ml->x)<<FRACBITS;
-    vertexes[i].y = SHORT(ml->y)<<FRACBITS;
+    vertexes[i].x = INT16(ml->x)<<FRACBITS;
+    vertexes[i].y = INT16(ml->y)<<FRACBITS;
     ml++;
   }
   W_UnlockLumpNum(lump);
@@ -383,19 +383,19 @@ static void P_LoadSegs (int lump)
 
       li->iSegID = i; // proff 11/05/2000: needed for OpenGL
 
-      v1 = (unsigned short)SHORT(ml->v1);
-      v2 = (unsigned short)SHORT(ml->v2);
+      v1 = (unsigned short)INT16(ml->v1);
+      v2 = (unsigned short)INT16(ml->v2);
       li->v1 = &vertexes[v1];
       li->v2 = &vertexes[v2];
 
       li->miniseg = false; // figgi -- there are no minisegs in classic BSP nodes
       li->length  = GetDistance(li->v2->x - li->v1->x, li->v2->y - li->v1->y);
-      li->angle = (SHORT(ml->angle))<<16;
-      li->offset =(SHORT(ml->offset))<<16;
-      linedef = (unsigned short)SHORT(ml->linedef);
+      li->angle = (INT16(ml->angle))<<16;
+      li->offset =(INT16(ml->offset))<<16;
+      linedef = (unsigned short)INT16(ml->linedef);
       ldef = &lines[linedef];
       li->linedef = ldef;
-      side = SHORT(ml->side);
+      side = INT16(ml->side);
       li->sidedef = &sides[ldef->sidenum[side]];
 
       /* cph 2006/09/30 - our frontsector can be the second side of the
@@ -442,8 +442,8 @@ static void P_LoadGLSegs(int lump)
 
   for(i = 0; i < numsegs; i++)
   {             // check for gl-vertices
-    segs[i].v1 = &vertexes[checkGLVertex(SHORT(ml->v1))];
-    segs[i].v2 = &vertexes[checkGLVertex(SHORT(ml->v2))];
+    segs[i].v1 = &vertexes[checkGLVertex(INT16(ml->v1))];
+    segs[i].v2 = &vertexes[checkGLVertex(INT16(ml->v2))];
     segs[i].iSegID  = i;
 
     if(ml->linedef != (unsigned short)-1) // skip minisegs
@@ -502,8 +502,8 @@ static void P_LoadSubsectors (int lump)
 
   for (i=0; i<numsubsectors; i++)
   {
-    subsectors[i].numlines  = (unsigned short)SHORT(data[i].numsegs );
-    subsectors[i].firstline = (unsigned short)SHORT(data[i].firstseg);
+    subsectors[i].numlines  = (unsigned short)INT16(data[i].numsegs );
+    subsectors[i].firstline = (unsigned short)INT16(data[i].firstseg);
   }
 
   W_UnlockLumpNum(lump); // cph - release the data
@@ -529,14 +529,14 @@ static void P_LoadSectors (int lump)
       const mapsector_t *ms = (const mapsector_t *) data + i;
 
       ss->iSectorID=i; // proff 04/05/2000: needed for OpenGL
-      ss->floorheight = SHORT(ms->floorheight)<<FRACBITS;
-      ss->ceilingheight = SHORT(ms->ceilingheight)<<FRACBITS;
+      ss->floorheight = INT16(ms->floorheight)<<FRACBITS;
+      ss->ceilingheight = INT16(ms->ceilingheight)<<FRACBITS;
       ss->floorpic = R_FlatNumForName(ms->floorpic);
       ss->ceilingpic = R_FlatNumForName(ms->ceilingpic);
-      ss->lightlevel = SHORT(ms->lightlevel);
-      ss->special = SHORT(ms->special);
-      ss->oldspecial = SHORT(ms->special);
-      ss->tag = SHORT(ms->tag);
+      ss->lightlevel = INT16(ms->lightlevel);
+      ss->special = INT16(ms->special);
+      ss->oldspecial = INT16(ms->special);
+      ss->tag = INT16(ms->tag);
       ss->thinglist = NULL;
       ss->touching_thinglist = NULL;            // phares 3/14/98
 
@@ -596,17 +596,17 @@ static void P_LoadNodes (int lump)
       const mapnode_t *mn = (const mapnode_t *) data + i;
       int j;
 
-      no->x = SHORT(mn->x)<<FRACBITS;
-      no->y = SHORT(mn->y)<<FRACBITS;
-      no->dx = SHORT(mn->dx)<<FRACBITS;
-      no->dy = SHORT(mn->dy)<<FRACBITS;
+      no->x = INT16(mn->x)<<FRACBITS;
+      no->y = INT16(mn->y)<<FRACBITS;
+      no->dx = INT16(mn->dx)<<FRACBITS;
+      no->dy = INT16(mn->dy)<<FRACBITS;
 
       for (j=0 ; j<2 ; j++)
         {
           int k;
-          no->children[j] = SHORT(mn->children[j]);
+          no->children[j] = INT16(mn->children[j]);
           for (k=0 ; k<4 ; k++)
-            no->bbox[j][k] = SHORT(mn->bbox[j][k])<<FRACBITS;
+            no->bbox[j][k] = INT16(mn->bbox[j][k])<<FRACBITS;
         }
     }
 
@@ -634,11 +634,11 @@ static void P_LoadThings (int lump)
     {
       mapthing_t mt = data[i];
 
-      mt.x = SHORT(mt.x);
-      mt.y = SHORT(mt.y);
-      mt.angle = SHORT(mt.angle);
-      mt.type = SHORT(mt.type);
-      mt.options = SHORT(mt.options);
+      mt.x = INT16(mt.x);
+      mt.y = INT16(mt.y);
+      mt.angle = INT16(mt.angle);
+      mt.type = INT16(mt.type);
+      mt.options = INT16(mt.options);
 
       if (!P_IsDoomnumAllowed(mt.type))
         continue;
@@ -676,11 +676,11 @@ static void P_LoadLineDefs (int lump)
       line_t *ld = lines+i;
       vertex_t *v1, *v2;
 
-      ld->flags = (unsigned short)SHORT(mld->flags);
-      ld->special = SHORT(mld->special);
-      ld->tag = SHORT(mld->tag);
-      v1 = ld->v1 = &vertexes[(unsigned short)SHORT(mld->v1)];
-      v2 = ld->v2 = &vertexes[(unsigned short)SHORT(mld->v2)];
+      ld->flags = (unsigned short)INT16(mld->flags);
+      ld->special = INT16(mld->special);
+      ld->tag = INT16(mld->tag);
+      v1 = ld->v1 = &vertexes[(unsigned short)INT16(mld->v1)];
+      v2 = ld->v2 = &vertexes[(unsigned short)INT16(mld->v2)];
       ld->dx = v2->x - v1->x;
       ld->dy = v2->y - v1->y;
 
@@ -717,8 +717,8 @@ static void P_LoadLineDefs (int lump)
       ld->soundorg.y = ld->bbox[BOXTOP] / 2 + ld->bbox[BOXBOTTOM] / 2;
 
       ld->iLineID=i; // proff 04/05/2000: needed for OpenGL
-      ld->sidenum[0] = SHORT(mld->sidenum[0]);
-      ld->sidenum[1] = SHORT(mld->sidenum[1]);
+      ld->sidenum[0] = INT16(mld->sidenum[0]);
+      ld->sidenum[1] = INT16(mld->sidenum[1]);
 
       { 
         /* cph 2006/09/30 - fix sidedef errors right away.
@@ -811,11 +811,11 @@ static void P_LoadSideDefs2(int lump)
       register side_t *sd = sides + i;
       register sector_t *sec;
 
-      sd->textureoffset = SHORT(msd->textureoffset)<<FRACBITS;
-      sd->rowoffset = SHORT(msd->rowoffset)<<FRACBITS;
+      sd->textureoffset = INT16(msd->textureoffset)<<FRACBITS;
+      sd->rowoffset = INT16(msd->rowoffset)<<FRACBITS;
 
       { /* cph 2006/09/30 - catch out-of-range sector numbers; use sector 0 instead */
-        unsigned short sector_num = SHORT(msd->sector);
+        unsigned short sector_num = INT16(msd->sector);
         if (sector_num >= numsectors) {
           lprintf(LO_WARN,"P_LoadSideDefs2: sidedef %i has out-of-range sector num %u\n", i, sector_num);
           sector_num = 0;
@@ -1204,23 +1204,23 @@ static void P_LoadBlockMap (int lump)
       // them. This potentially doubles the size of blockmaps allowed,
       // because Doom originally considered the offsets as always signed.
 
-      blockmaplump[0] = SHORT(wadblockmaplump[0]);
-      blockmaplump[1] = SHORT(wadblockmaplump[1]);
-      blockmaplump[2] = (long)(SHORT(wadblockmaplump[2])) & 0xffff;
-      blockmaplump[3] = (long)(SHORT(wadblockmaplump[3])) & 0xffff;
+      blockmaplump[0] = INT16(wadblockmaplump[0]);
+      blockmaplump[1] = INT16(wadblockmaplump[1]);
+      blockmaplump[2] = (long)(INT16(wadblockmaplump[2])) & 0xffff;
+      blockmaplump[3] = (long)(INT16(wadblockmaplump[3])) & 0xffff;
 
       for (i=4 ; i<count ; i++)
         {
-          short t = SHORT(wadblockmaplump[i]);          // killough 3/1/98
+          short t = INT16(wadblockmaplump[i]);          // killough 3/1/98
           blockmaplump[i] = t == -1 ? -1l : (long) t & 0xffff;
         }
 
       W_UnlockLumpNum(lump); // cph - unlock the lump
 
-      bmaporgx = blockmaplump[0]<<FRACBITS;
-      bmaporgy = blockmaplump[1]<<FRACBITS;
-      bmapwidth = blockmaplump[2];
-      bmapheight = blockmaplump[3];
+      bmaporgx = (int)(blockmaplump[0]<<FRACBITS);
+      bmaporgy = (int)(blockmaplump[1]<<FRACBITS);
+      bmapwidth = (int)(blockmaplump[2]);
+      bmapheight = (int)(blockmaplump[3]);
     }
 
   // clear out mobj chains - CPhipps - use calloc

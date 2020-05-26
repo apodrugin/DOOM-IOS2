@@ -2280,7 +2280,7 @@ void P_MapEnd(void) {
 static void SpechitOverrun(line_t *ld)
 {
   //int addr = 0x01C09C98 + (ld - lines) * 0x3E;
-  int addr = 0x00C09C98 + (ld - lines) * 0x3E;
+  int addr = (int)(0x00C09C98 + (ld - lines) * 0x3E);
 
   if (compatibility_level == dosdoom_compatibility || compatibility_level == tasdoom_compatibility)
   {

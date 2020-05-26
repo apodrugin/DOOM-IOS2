@@ -221,7 +221,7 @@ void ShowSound() {
 void I_SetChannels(void) {}
 
 // Get raw data lump index for sound descriptor.
-long I_GetSfxLumpNum (sfxinfo_t *sfx) {
+int I_GetSfxLumpNum (sfxinfo_t *sfx) {
 	// find the pkWav_t for this sfxinfo
 	char	upper[16], *d = upper;
 	for ( const char *c = sfx->name ; *c ; c++ ) {
@@ -230,7 +230,7 @@ long I_GetSfxLumpNum (sfxinfo_t *sfx) {
 	*d = 0;
 	pkWav_t *pkwav = PK_FindWav( va( "newsfx/DS%s.wav", upper ) );	
 	
-	return pkwav - pkWavs;
+	return (int)(pkwav - pkWavs);
 }
 
 // Starts a sound in a particular sound channel.

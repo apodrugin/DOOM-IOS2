@@ -56,7 +56,7 @@ typedef struct {
 } PACKEDATTR packet_header_t;
 
 static inline void packet_set(packet_header_t* p, enum packet_type_e t, unsigned long tic)
-{ p->tic = doom_htonl(tic); p->type = t; p->reserved[0] = 0; p->reserved[1] = 0; }
+{ p->tic = doom_hton_int32(tic); p->type = t; p->reserved[0] = 0; p->reserved[1] = 0; }
 
 #ifndef GAME_OPTIONS_SIZE
 // From g_game.h
@@ -79,8 +79,8 @@ struct setup_packet_s {
 inline static void RawToTic(ticcmd_t* dst, const void* src)
 {
   memcpy(dst,src,sizeof *dst);
-  dst->angleturn = doom_ntohs(dst->angleturn);
-  dst->consistancy = doom_ntohs(dst->consistancy);
+  dst->angleturn = doom_ntoh_int16(dst->angleturn);
+  dst->consistancy = doom_ntoh_int16(dst->consistancy);
 }
 
 inline static void TicToRaw(void* dst, const ticcmd_t* src)
@@ -90,7 +90,7 @@ inline static void TicToRaw(void* dst, const ticcmd_t* src)
    * destination, because it might not be aligned).
    */
   ticcmd_t tmp = *src;
-  tmp.angleturn = doom_ntohs(tmp.angleturn);
-  tmp.consistancy = doom_ntohs(tmp.consistancy);
+  tmp.angleturn = doom_ntoh_int16(tmp.angleturn);
+  tmp.consistancy = doom_ntoh_int16(tmp.consistancy);
   memcpy(dst,&tmp,sizeof tmp);
 }

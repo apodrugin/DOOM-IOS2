@@ -124,7 +124,7 @@ int M_ReadFile(char const *name, byte **buffer)
         {
           fclose(fp);
           I_EndRead();
-          return length;
+          return (int)length;
         }
       fclose(fp);
     }
@@ -916,13 +916,13 @@ struct default_s *M_LookupDefault(const char *name)
 
 void M_LoadDefaults (void)
 {
-  int   i;
-  int   len;
-  FILE* f;
-  char  def[80];
-  char  strparm[100];
-  char* newstring = NULL;   // killough
-  int   parm;
+  int     i;
+  size_t  len;
+  FILE*   f;
+  char    def[80];
+  char    strparm[100];
+  char*   newstring = NULL;   // killough
+  int     parm;
   boolean isstring;
 
   // set everything to base values

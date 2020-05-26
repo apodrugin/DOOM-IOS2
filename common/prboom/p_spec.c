@@ -2548,7 +2548,7 @@ void P_SpawnSpecials (void)
       // killough 3/7/98:
       // support for drawn heights coming from different sector
       case 242:
-        sec = sides[*lines[i].sidenum].sector-sectors;
+        sec = (int)(sides[*lines[i].sidenum].sector-sectors);
         for (s = -1; (s = P_FindSectorFromLineTag(lines+i,s)) >= 0;)
           sectors[s].heightsec = sec;
         break;
@@ -2556,7 +2556,7 @@ void P_SpawnSpecials (void)
       // killough 3/16/98: Add support for setting
       // floor lighting independently (e.g. lava)
       case 213:
-        sec = sides[*lines[i].sidenum].sector-sectors;
+        sec = (int)(sides[*lines[i].sidenum].sector-sectors);
         for (s = -1; (s = P_FindSectorFromLineTag(lines+i,s)) >= 0;)
           sectors[s].floorlightsec = sec;
         break;
@@ -2564,7 +2564,7 @@ void P_SpawnSpecials (void)
       // killough 4/11/98: Add support for setting
       // ceiling lighting independently
       case 261:
-        sec = sides[*lines[i].sidenum].sector-sectors;
+        sec = (int)(sides[*lines[i].sidenum].sector-sectors);
         for (s = -1; (s = P_FindSectorFromLineTag(lines+i,s)) >= 0;)
           sectors[s].ceilinglightsec = sec;
         break;
@@ -2781,14 +2781,14 @@ static void P_SpawnScrollers(void)
       if (special >= 245 && special <= 249)         // displacement scrollers
         {
           special += 250-245;
-          control = sides[*l->sidenum].sector - sectors;
+          control = (int)(sides[*l->sidenum].sector - sectors);
         }
       else
         if (special >= 214 && special <= 218)       // accelerative scrollers
           {
             accel = 1;
             special += 250-214;
-            control = sides[*l->sidenum].sector - sectors;
+            control = (int)(sides[*l->sidenum].sector - sectors);
           }
 
       switch (special)
@@ -3214,10 +3214,10 @@ void T_Pusher(pusher_t *p)
         tmbbox[BOXRIGHT]  = p->x + radius;
         tmbbox[BOXLEFT]   = p->x - radius;
 
-        xl = (tmbbox[BOXLEFT] - bmaporgx - MAXRADIUS)>>MAPBLOCKSHIFT;
-        xh = (tmbbox[BOXRIGHT] - bmaporgx + MAXRADIUS)>>MAPBLOCKSHIFT;
-        yl = (tmbbox[BOXBOTTOM] - bmaporgy - MAXRADIUS)>>MAPBLOCKSHIFT;
-        yh = (tmbbox[BOXTOP] - bmaporgy + MAXRADIUS)>>MAPBLOCKSHIFT;
+        xl = (int)((tmbbox[BOXLEFT] - bmaporgx - MAXRADIUS)>>MAPBLOCKSHIFT);
+        xh = (int)((tmbbox[BOXRIGHT] - bmaporgx + MAXRADIUS)>>MAPBLOCKSHIFT);
+        yl = (int)((tmbbox[BOXBOTTOM] - bmaporgy - MAXRADIUS)>>MAPBLOCKSHIFT);
+        yh = (int)((tmbbox[BOXTOP] - bmaporgy + MAXRADIUS)>>MAPBLOCKSHIFT);
         for (bx=xl ; bx<=xh ; bx++)
             for (by=yl ; by<=yh ; by++)
                 P_BlockThingsIterator(bx,by,PIT_PushThing);

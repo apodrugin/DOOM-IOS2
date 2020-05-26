@@ -333,11 +333,11 @@ int mmus2mid(const UBYTE *mus, MIDI *mididata, UWORD division, int nocomp)
   // copy the MUS header from the MUS buffer to the MUSh header structure
 
   memcpy(&MUSh,mus,sizeof(MUSheader));
-  MUSh.ScoreLength = doom_wtohs(MUSh.ScoreLength);
-  MUSh.ScoreStart  = doom_wtohs(MUSh.ScoreStart);
-  MUSh.channels    = doom_wtohs(MUSh.channels);
-  MUSh.SecChannels = doom_wtohs(MUSh.SecChannels);
-  MUSh.InstrCnt    = doom_wtohs(MUSh.InstrCnt);
+  MUSh.ScoreLength = doom_wtoh_int16(MUSh.ScoreLength);
+  MUSh.ScoreStart  = doom_wtoh_int16(MUSh.ScoreStart);
+  MUSh.channels    = doom_wtoh_int16(MUSh.channels);
+  MUSh.SecChannels = doom_wtoh_int16(MUSh.SecChannels);
+  MUSh.InstrCnt    = doom_wtoh_int16(MUSh.InstrCnt);
 
   // check some things and set length of MUS buffer from internal data
 
@@ -620,7 +620,7 @@ int MidiToMIDI(UBYTE *mid,MIDI *mididata)
       }
     }
     mid += 4;
-    mididata->track[i].len = ReadLength(&mid);  // get length, move mid past it
+    mididata->track[i].len = (int)ReadLength(&mid);  // get length, move mid past it
 
     // read a track
     mididata->track[i].data = realloc(mididata->track[i].data,mididata->track[i].len);
@@ -723,7 +723,7 @@ int MIDIToMidi(MIDI *mididata,UBYTE **mid,int *midlen)
 
   // return length information
 
-  *midlen = midiptr - *mid;
+  *midlen = (int)(midiptr - *mid);
 
   return 0;
 }

@@ -892,7 +892,7 @@ void R_SortVisSprites (void)
 {
   if (num_vissprite)
     {
-      int i = num_vissprite;
+      long i = num_vissprite;
 
       // If we need to allocate more pointers for the vissprites,
       // allocate as many as were allocated for sprites -- killough
@@ -911,7 +911,7 @@ void R_SortVisSprites (void)
       // killough 9/22/98: replace qsort with merge sort, since the keys
       // are roughly in order to begin with, due to BSP rendering.
 
-      msort(vissprite_ptrs, vissprite_ptrs + num_vissprite, num_vissprite);
+      msort(vissprite_ptrs, vissprite_ptrs + num_vissprite, (int)num_vissprite);
     }
 }
 
@@ -1056,8 +1056,8 @@ void R_DrawMasked(void)
 
   // draw all vissprites back to front
 
-  rendered_vissprites = num_vissprite;
-  for (i = num_vissprite ;--i>=0; )
+  rendered_vissprites = (int)num_vissprite;
+  for (i = (int)num_vissprite ;--i>=0; )
     R_DrawSprite(vissprite_ptrs[i]);         // killough
 
   // render any remaining masked mid textures

@@ -88,13 +88,13 @@ static void P_SetPsprite(player_t *player, int position, statenum_t stnum)
 
       state = &states[stnum];
       psp->state = state;
-      psp->tics = state->tics;        // could be 0
+      psp->tics = (int)state->tics;        // could be 0
 
       if (state->misc1)
         {
           // coordinate set
-          psp->sx = state->misc1 << FRACBITS;
-          psp->sy = state->misc2 << FRACBITS;
+          psp->sx = (int)(state->misc1 << FRACBITS);
+          psp->sy = (int)(state->misc2 << FRACBITS);
         }
 
       // Call action routine.
@@ -450,10 +450,10 @@ void A_Raise(player_t *player, pspdef_t *psp)
 // muzzle flash, rather than the pressing of the trigger.
 // The BFG delay caused this to be necessary.
 
-static void A_FireSomething(player_t* player,int adder)
+static void A_FireSomething(player_t* player,long adder)
 {
   P_SetPsprite(player, ps_flash,
-               weaponinfo[player->readyweapon].flashstate+adder);
+               (statenum_t)(weaponinfo[player->readyweapon].flashstate+adder));
 
   // killough 3/27/98: prevent recoil in no-clipping mode
   if (!(player->mo->flags & MF_NOCLIP))

@@ -140,7 +140,7 @@ static void R_InitTextures (void)
   // Load the patch names from pnames.lmp.
   name[8] = 0;
   names = W_CacheLumpNum(names_lump = W_GetNumForName("PNAMES"));
-  nummappatches = LONG(*((const int *)names));
+  nummappatches = INT32(*((const int *)names));
   name_p = names+4;
   patchlookup = malloc(nummappatches*sizeof(*patchlookup));  // killough
 
@@ -172,14 +172,14 @@ static void R_InitTextures (void)
   //  TEXTURE1 for shareware, plus TEXTURE2 for commercial.
 
   maptex = maptex1 = W_CacheLumpNum(maptex_lump[0] = W_GetNumForName("TEXTURE1"));
-  numtextures1 = LONG(*maptex);
+  numtextures1 = INT32(*maptex);
   maxoff = W_LumpLength(maptex_lump[0]);
   directory = maptex+1;
 
   if (W_CheckNumForName("TEXTURE2") != -1)
     {
       maptex2 = W_CacheLumpNum(maptex_lump[1] = W_GetNumForName("TEXTURE2"));
-      numtextures2 = LONG(*maptex2);
+      numtextures2 = INT32(*maptex2);
       maxoff2 = W_LumpLength(maptex_lump[1]);
     }
   else
@@ -208,7 +208,7 @@ static void R_InitTextures (void)
           directory = maptex+1;
         }
 
-      offset = LONG(*directory);
+      offset = INT32(*directory);
 
       if (offset > maxoff)
         I_Error("R_InitTextures: Bad texture directory");
@@ -217,12 +217,12 @@ static void R_InitTextures (void)
 
       texture = textures[i] =
         Z_Malloc(sizeof(texture_t) +
-                 sizeof(texpatch_t)*(SHORT(mtexture->patchcount)-1),
+                 sizeof(texpatch_t)*(INT16(mtexture->patchcount)-1),
                  PU_STATIC, 0);
 
-      texture->width = SHORT(mtexture->width);
-      texture->height = SHORT(mtexture->height);
-      texture->patchcount = SHORT(mtexture->patchcount);
+      texture->width = INT16(mtexture->width);
+      texture->height = INT16(mtexture->height);
+      texture->patchcount = INT16(mtexture->patchcount);
 
         /* Mattias Engdegård emailed me of the following explenation of
          * why memcpy doesnt work on some systems:
@@ -265,14 +265,14 @@ static void R_InitTextures (void)
 
       for (j=0 ; j<texture->patchcount ; j++, mpatch++, patch++)
         {
-          patch->originx = SHORT(mpatch->originx);
-          patch->originy = SHORT(mpatch->originy);
-          patch->patch = patchlookup[SHORT(mpatch->patch)];
+          patch->originx = INT16(mpatch->originx);
+          patch->originy = INT16(mpatch->originy);
+          patch->patch = patchlookup[INT16(mpatch->patch)];
           if (patch->patch == -1)
             {
               //jff 8/3/98 use logical output routine
               lprintf(LO_ERROR,"\nR_InitTextures: Missing patch %d in texture %.8s",
-                     SHORT(mpatch->patch), texture->name); // killough 4/17/98
+                     INT16(mpatch->patch), texture->name); // killough 4/17/98
               ++errors;
             }
         }
@@ -411,13 +411,15 @@ const lighttable_t* R_ColourMap(int lightlevel, fixed_t spriteyscale)
 {
   if (fixedcolormap) return fixedcolormap;
   else {
-    if (curline)
-      if (curline->v1->y == curline->v2->y)
+    if (curline) {
+      if (curline->v1->y == curline->v2->y) {
         lightlevel -= 1 << LIGHTSEGSHIFT;
-      else
-        if (curline->v1->x == curline->v2->x)
-          lightlevel += 1 << LIGHTSEGSHIFT;
-
+      }
+      else if (curline->v1->x == curline->v2->x) {
+        lightlevel += 1 << LIGHTSEGSHIFT;
+      }
+    }
+    
     lightlevel += extralight << LIGHTSEGSHIFT;
 
     /* cph 2001/11/17 -

@@ -396,7 +396,7 @@ void D_NetSendMisc(netmisctype_t type, size_t len, void* data)
     int *p = (void*)(packet+1);
 
     packet_set(packet, PKT_EXTRA, gametic);
-    *p++ = LONG(type); *p++ = LONG(consoleplayer); *p++ = LONG(len);
+    *p++ = INT32(type); *p++ = INT32(consoleplayer); *p++ = INT32(len);
     memcpy(p, data, len);
     I_SendPacket(packet, size);
 
@@ -420,10 +420,10 @@ static void CheckQueuedPackets(void)
       case PKT_EXTRA:
   {
     int *p = (int*)(queuedpacket[i]+1);
-    size_t len = LONG(*(p+2));
-    switch (LONG(*p)) {
+    size_t len = INT32(*(p+2));
+    switch (INT32(*p)) {
     case nm_plcolour:
-      G_ChangedPlayerColour(LONG(*(p+1)), LONG(*(p+3)));
+      G_ChangedPlayerColour(INT32(*(p+1)), INT32(*(p+3)));
       break;
     case nm_savegamename:
       if (len < SAVEDESCLEN) {

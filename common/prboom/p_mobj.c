@@ -81,9 +81,9 @@ boolean P_SetMobjState(mobj_t* mobj,statenum_t state)
 
     st = &states[state];
     mobj->state = st;
-    mobj->tics = st->tics;
+    mobj->tics = (int)st->tics;
     mobj->sprite = st->sprite;
-    mobj->frame = st->frame;
+    mobj->frame = (int)st->frame;
 
     // Modified handling.
     // Call action functions when the state is set
@@ -844,9 +844,9 @@ mobj_t* P_SpawnMobj(fixed_t x,fixed_t y,fixed_t z,mobjtype_t type)
   st = &states[info->spawnstate];
 
   mobj->state  = st;
-  mobj->tics   = st->tics;
+  mobj->tics   = (int)st->tics;
   mobj->sprite = st->sprite;
-  mobj->frame  = st->frame;
+  mobj->frame  = (int)st->frame;
   mobj->touching_sectorlist = NULL; // NULL head of sector list // phares 3/13/98
 
   // set subsector and/or block links

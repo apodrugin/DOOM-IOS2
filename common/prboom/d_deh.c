@@ -83,7 +83,7 @@ typedef struct {
 static char *dehfgets(char *buf, size_t n, DEHFILE *fp)
 {
   if (!fp->lump)                                     // If this is a real file,
-    return (fgets)(buf, n, fp->f);                   // return regular fgets
+    return (fgets)(buf, (int)n, fp->f);                   // return regular fgets
   if (!n || !*fp->inp || fp->size<=0)                // If no more characters
     return NULL;
   if (n==1)
@@ -2850,7 +2850,8 @@ static void deh_procBexSounds(DEHFILE *fpin, FILE *fpout, char *line)
    uint_64_t value;    // All deh values are ints or longs
    char *strval;  // holds the string value of the line
    char candidate[7];
-   int  rover, len;
+   int  rover;
+   size_t len;
    
    if(fpout)
       fprintf(fpout,"Processing sound name substitution\n");
@@ -2909,7 +2910,8 @@ static void deh_procBexMusic(DEHFILE *fpin, FILE *fpout, char *line)
    uint_64_t value;    // All deh values are ints or longs
    char *strval;  // holds the string value of the line
    char candidate[7];
-   int  rover, len;
+   int  rover;
+   size_t len;
    
    if(fpout)
       fprintf(fpout,"Processing music name substitution\n");

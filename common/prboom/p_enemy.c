@@ -2524,8 +2524,8 @@ void A_Spawn(mobj_t *mo)
   if (mo->state->misc1)
     {
       /* mobj_t *newmobj = */
-      P_SpawnMobj(mo->x, mo->y, (mo->state->misc2 << FRACBITS) + mo->z,
-      mo->state->misc1 - 1);
+      P_SpawnMobj(mo->x, mo->y, (fixed_t)((mo->state->misc2 << FRACBITS) + mo->z),
+      (mobjtype_t)(mo->state->misc1 - 1));
       /* CPhipps - no friendlyness (yet)
    newmobj->flags = (newmobj->flags & ~MF_FRIEND) | (mo->flags & MF_FRIEND);
       */
@@ -2545,19 +2545,19 @@ void A_Face(mobj_t *mo)
 void A_Scratch(mobj_t *mo)
 {
   mo->target && (A_FaceTarget(mo), P_CheckMeleeRange(mo)) ?
-    mo->state->misc2 ? S_StartSound(mo, mo->state->misc2) : (void) 0,
-    P_DamageMobj(mo->target, mo, mo, mo->state->misc1) : (void) 0;
+    mo->state->misc2 ? S_StartSound(mo, (int)mo->state->misc2) : (void) 0,
+    P_DamageMobj(mo->target, mo, mo, (int)mo->state->misc1) : (void) 0;
 }
 
 void A_PlaySound(mobj_t *mo)
 {
-  S_StartSound(mo->state->misc2 ? NULL : mo, mo->state->misc1);
+  S_StartSound(mo->state->misc2 ? NULL : mo, (int)mo->state->misc1);
 }
 
 void A_RandomJump(mobj_t *mo)
 {
   if (P_Random(pr_randomjump) < mo->state->misc2)
-    P_SetMobjState(mo, mo->state->misc1);
+    P_SetMobjState(mo, (statenum_t)mo->state->misc1);
 }
 
 //

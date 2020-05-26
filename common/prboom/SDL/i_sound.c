@@ -60,7 +60,7 @@
 #endif // ID_DISABLE_SDL_SOUND
 
 #ifdef HAVE_MIXER
-#include "SDL_mixer.h"
+#include "SDL_Mixer.h"
 #endif
 
 #include "z_zone.h"
@@ -603,7 +603,7 @@ void I_InitSound(void)
 #ifndef HAVE_OWN_MUSIC
 
 #ifdef HAVE_MIXER
-#include "SDL_mixer.h"
+#include "SDL_Mixer.h"
 #include "mmus2mid.h"
 
 static Mix_Music *music[2] = { NULL, NULL };

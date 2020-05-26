@@ -138,6 +138,7 @@ extern int SCREENPITCH;
 // at the intermission screen, the game final animation, or a demo.
 
 typedef enum {
+  GS_INVALID = -1,
   GS_LEVEL,
   GS_INTERMISSION,
   GS_FINALE,

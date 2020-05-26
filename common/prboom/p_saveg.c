@@ -258,7 +258,7 @@ typedef enum {
 // phares 9/13/98: Moved this code outside of P_ArchiveThinkers so the
 // thinker indices could be used by the code that saves sector info.
 
-static int number_of_thinkers;
+static long number_of_thinkers;
 
 void P_ThinkerToIndex(void)
   {
@@ -421,7 +421,7 @@ static int P_GetMobj(mobj_t* mi, size_t s)
 {
   size_t i = (size_t)mi;
   if (i >= s) I_Error("Corrupt savegame");
-  return i;
+  return (int)i;
 }
 
 void P_UnArchiveThinkers (void)

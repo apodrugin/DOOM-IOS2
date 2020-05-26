@@ -359,7 +359,7 @@ void P_SetThingPosition(mobj_t *thing)
 
 boolean P_BlockLinesIterator(int x, int y, boolean func(line_t*))
 {
-  int        offset;
+  long       offset;
   const long *list;   // killough 3/1/98: for removal of blockmap limit
 
   if (x<0 || y<0 || x>=bmapwidth || y>=bmapheight)
@@ -539,7 +539,7 @@ boolean PIT_AddThingIntercepts(mobj_t *thing)
 boolean P_TraverseIntercepts(traverser_t func, fixed_t maxfrac)
 {
   intercept_t *in = NULL;
-  int count = intercept_p - intercepts;
+  int count = (int)(intercept_p - intercepts);
   while (count--)
     {
       fixed_t dist = INT_MAX;

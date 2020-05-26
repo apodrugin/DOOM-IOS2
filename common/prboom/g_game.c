@@ -767,7 +767,7 @@ void G_Ticker (void)
   // CPhipps - player colour changing
   if (!demoplayback && mapcolor_plyr[consoleplayer] != mapcolor_me) {
     // Changed my multiplayer colour - Inform the whole game
-    int net_cl = LONG(mapcolor_me);
+    int net_cl = INT32(mapcolor_me);
 #ifdef HAVE_NET
     D_NetSendMisc(nm_plcolour, sizeof(net_cl), &net_cl);
 #endif
@@ -955,6 +955,9 @@ void G_Ticker (void)
 
     case GS_DEMOSCREEN:
       D_PageTicker ();
+      break;
+            
+    case GS_INVALID:
       break;
     }
 }
@@ -1166,7 +1169,7 @@ static boolean G_CheckSpot(int playernum, mapthing_t *mthing)
 //
 void G_DeathMatchSpawnPlayer (int playernum)
 {
-  int j, selections = deathmatch_p - deathmatchstarts;
+  int j, selections = (int)(deathmatch_p - deathmatchstarts);
 
   if (selections < MAXPLAYERS)
     I_Error("G_DeathMatchSpawnPlayer: Only %i deathmatch spots, %d required",
@@ -1912,7 +1915,7 @@ void G_SaveGameName(char *name, size_t size, int slot, boolean isDemoplayback)
 
   *save_p++ = 0xe6;   // consistancy marker
 
-  length = save_p - savebuffer;
+  length = (int)(save_p - savebuffer);
 
   Z_CheckHeap();
   doom_printf( "%s", M_WriteFile(name, savebuffer, length)
@@ -2314,7 +2317,7 @@ void G_RecordDemo (const char* name)
     demofp = fopen(demoname, "r+");
     if (demofp) {
       int slot = -1;
-      int rc;
+      size_t rc;
       int bytes_per_tic;
       const byte* pos;
 

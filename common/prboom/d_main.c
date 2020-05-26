@@ -135,7 +135,10 @@ const char *const standard_iwads[]=
   "doomu.wad", /* CPhipps - alow doomu.wad */
   "freedoom.wad", /* wart@kobold.org:  added freedoom for Fedora Extras */
 };
+
+#ifndef IPHONE
 static const int nstandard_iwads = sizeof standard_iwads/sizeof*standard_iwads;
+#endif
 
 /*
  * D_PostEvent - Event handling
@@ -207,7 +210,7 @@ void D_Display (void)
   static boolean inhelpscreensstate   = false;
   static boolean isborderstate        = false;
   static boolean borderwillneedredraw = false;
-  static gamestate_t oldgamestate = -1;
+  static gamestate_t oldgamestate = GS_INVALID;
   boolean wipe;
   boolean viewactive = false, isborder = false;
 
@@ -223,7 +226,7 @@ void D_Display (void)
 
   if (gamestate != GS_LEVEL) { // Not a level
     switch (oldgamestate) {
-    case -1:
+    case GS_INVALID:
     case GS_LEVEL:
       V_SetPalette(0); // cph - use default (basic) palette
     default:
@@ -250,7 +253,7 @@ void D_Display (void)
 
     if (setsizeneeded) {               // change the view size if needed
       R_ExecuteSetViewSize();
-      oldgamestate = -1;            // force background redraw
+      oldgamestate = GS_INVALID;            // force background redraw
     }
 
     // Work out if the player view is visible, and if there is a border
@@ -637,8 +640,8 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
         filelump_t *fileinfo;
 
         // read IWAD directory
-        header.numlumps = LONG(header.numlumps);
-        header.infotableofs = LONG(header.infotableofs);
+        header.numlumps = INT32(header.numlumps);
+        header.infotableofs = INT32(header.infotableofs);
         length = header.numlumps;
         fileinfo = malloc(length*sizeof(filelump_t));
         if (fseek (fp, header.infotableofs, SEEK_SET) ||
@@ -714,7 +717,7 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
 //
 static void NormalizeSlashes(char *str)
 {
-  int l;
+  long l;
 
   // killough 1/18/98: Neater / \ handling.
   // Remove trailing / or \ to prevent // /\ \/ \\, and change \ to /
@@ -780,7 +783,7 @@ static char *FindIWADFile(void)
 
 static void IdentifyVersion ( const char * iwad )
 {
-  int         i;    //jff 3/24/98 index of args on commandline
+  long        i;    //jff 3/24/98 index of args on commandline
   struct stat sbuf; //jff 3/24/98 used to test save path for existence
   //const char *iwad;
 
@@ -1016,7 +1019,7 @@ static void DoLooseFiles(void)
   int wadcount = 0;      // count the loose filenames
   int lmpcount = 0;
   int dehcount = 0;
-  int i,j,p;
+  long i,j,p;
   const char **tmyargv;  // use these to recreate the argv array
   int tmyargc;
   boolean skip[MAXARGVS]; // CPhipps - should these be skipped at the end

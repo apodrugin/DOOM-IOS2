@@ -118,7 +118,7 @@ void R_LoadTrigTables(void)
 
     // Must correct endianness of every long loaded (!)
 #define CORRECT_TABLE_ENDIAN(tbl) \
-    for (n = 0; n<sizeof(tbl)/sizeof(tbl[0]); n++) tbl[n] = doom_swap_l(tbl[n])
+    for (n = 0; n<sizeof(tbl)/sizeof(tbl[0]); n++) tbl[n] = (fixed_t)doom_swap_int32(tbl[n])
 
     CORRECT_TABLE_ENDIAN(finesine);
     CORRECT_TABLE_ENDIAN(finetangent);

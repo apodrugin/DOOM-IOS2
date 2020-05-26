@@ -904,7 +904,7 @@ void M_SaveSelect(int choice)
   strcpy(saveOldString,savegamestrings[choice]);
   if (!strcmp(savegamestrings[choice],s_EMPTYSTRING)) // Ty 03/27/98 - externalized
     savegamestrings[choice][0] = 0;
-  saveCharIndex = strlen(savegamestrings[choice]);
+  saveCharIndex = (int)strlen(savegamestrings[choice]);
 }
 
 //
@@ -1906,7 +1906,7 @@ static void M_DrawSetting(const setup_menu_t* s)
       // while you're editing the string.
 
       while (M_GetPixelWidth(text) >= MAXCHATWIDTH) {
-  int len = strlen(text);
+  size_t len = strlen(text);
   text[--len] = 0;
   if (chat_index > len)
     chat_index--;

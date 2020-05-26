@@ -42,6 +42,8 @@
  * To find our own endianness, use config.h
  */
 
+#include <stdint.h>
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
@@ -60,30 +62,30 @@
 #ifdef HAVE_ASM_BYTEORDER_H
 #include <asm/byteorder.h>
 #ifdef __arch__swab16
-#define doom_swap_s  (signed short)__arch__swab16
+#define doom_swap_int16  (int16_t)__arch__swab16
 #endif
 #ifdef __arch__swab32
-#define doom_swap_l  (signed long)__arch__swab32
+#define doom_swap_int32  (int32_t)__arch__swab32
 #endif
 #endif /* HAVE_ASM_BYTEORDER_H */
 
 #ifdef HAVE_LIBKERN_OSBYTEORDER_H
 #include <libkern/OSByteOrder.h>
 
-#define doom_swap_s (short)OSSwapInt16
-#define doom_swap_l (long)OSSwapInt32
+#define doom_swap_int16 (int16_t)OSSwapInt16
+#define doom_swap_int32 (int32_t)OSSwapInt32
 #endif
 
-#ifndef doom_swap_l
-#define doom_swap_l(x) \
-        ((long int)((((unsigned long int)(x) & 0x000000ffU) << 24) | \
+#ifndef doom_swap_int32
+#define doom_swap_int32(x) \
+        ((int32_t)((((unsigned long int)(x) & 0x000000ffU) << 24) | \
                              (((unsigned long int)(x) & 0x0000ff00U) <<  8) | \
                              (((unsigned long int)(x) & 0x00ff0000U) >>  8) | \
                              (((unsigned long int)(x) & 0xff000000U) >> 24)))
 #endif
 
-#ifndef doom_swap_s
-#define doom_swap_s(x) \
+#ifndef doom_swap_int16
+#define doom_swap_int16(x) \
         ((short int)((((unsigned short int)(x) & 0x00ff) << 8) | \
                               (((unsigned short int)(x) & 0xff00) >> 8))) 
 #endif
@@ -99,33 +101,33 @@
 
 #ifdef WORDS_BIGENDIAN
 
-#define doom_wtohl(x) doom_swap_l(x)
-#define doom_htowl(x) doom_swap_l(x)
-#define doom_wtohs(x) doom_swap_s(x)
-#define doom_htows(x) doom_swap_s(x)
+#define doom_wtoh_int32(x) doom_swap_int32(x)
+#define doom_htow_int32(x) doom_swap_int32(x)
+#define doom_wtoh_int16(x) doom_swap_int16(x)
+#define doom_htow_int16(x) doom_swap_int16(x)
 
-#define doom_ntohl(x) doom_swap_l(x)
-#define doom_htonl(x) doom_swap_l(x)
-#define doom_ntohs(x) doom_swap_s(x)
-#define doom_htons(x) doom_swap_s(x)
+#define doom_ntoh_int32(x) doom_swap_int32(x)
+#define doom_hton_int32(x) doom_swap_int32(x)
+#define doom_ntoh_int16(x) doom_swap_int16(x)
+#define doom_hton_int16(x) doom_swap_int16(x)
 
 #else
 
-#define doom_wtohl(x) (long int)(x)
-#define doom_htowl(x) (long int)(x)
-#define doom_wtohs(x) (short int)(x)
-#define doom_htows(x) (short int)(x)
+#define doom_wtoh_int32(x) (int32_t)(x)
+#define doom_htow_int32(x) (int32_t)(x)
+#define doom_wtoh_int16(x) (int16_t)(x)
+#define doom_htow_int16(x) (int16_t)(x)
 
-#define doom_ntohl(x) (long int)(x)
-#define doom_htonl(x) (long int)(x)
-#define doom_ntohs(x) (short int)(x)
-#define doom_htons(x) (short int)(x)
+#define doom_ntoh_int32(x) (int32_t)(x)
+#define doom_hton_int32(x) (int32_t)(x)
+#define doom_ntoh_int16(x) (int16_t)(x)
+#define doom_hton_int16(x) (int16_t)(x)
 
 #endif
 
 /* CPhipps - Boom's old LONG and SHORT endianness macros are for WAD stuff */
 
-#define LONG(x) doom_wtohl(x)
-#define SHORT(x) doom_htows(x)
+#define INT32(x) doom_wtoh_int32(x)
+#define INT16(x) doom_htow_int16(x)
 
 #endif

@@ -168,7 +168,7 @@ static void W_AddFile(wadfile_info_t *wadfile)
       // single lump file
       fileinfo = &singleinfo;
       singleinfo.filepos = 0;
-      singleinfo.size = LONG(I_Filelength(wadfile->handle));
+      singleinfo.size = INT32(I_Filelength(wadfile->handle));
       ExtractFileBase(wadfile->name, singleinfo.name);
       numlumps++;
     }
@@ -179,8 +179,8 @@ static void W_AddFile(wadfile_info_t *wadfile)
       if (strncmp(header.identification,"IWAD",4) &&
           strncmp(header.identification,"PWAD",4))
         I_Error("W_AddFile: Wad file %s doesn't have IWAD or PWAD id", wadfile->name);
-      header.numlumps = LONG(header.numlumps);
-      header.infotableofs = LONG(header.infotableofs);
+      header.numlumps = INT32(header.numlumps);
+      header.infotableofs = INT32(header.infotableofs);
       length = header.numlumps*sizeof(filelump_t);
       fileinfo2free = fileinfo = malloc(length);    // killough
        lseek(wadfile->handle, header.infotableofs, SEEK_SET);
@@ -196,8 +196,8 @@ static void W_AddFile(wadfile_info_t *wadfile)
     for (i=startlump ; (int)i<numlumps ; i++,lump_p++, fileinfo++)
       {
         lump_p->wadfile = wadfile;                    //  killough 4/25/98
-        lump_p->position = LONG(fileinfo->filepos);
-        lump_p->size = LONG(fileinfo->size);
+        lump_p->position = INT32(fileinfo->filepos);
+        lump_p->size = INT32(fileinfo->size);
         lump_p->li_namespace = ns_global;              // killough 4/17/98
         strncpy (lump_p->name, fileinfo->name, 8);
 	lump_p->source = wadfile->src;                    // Ty 08/29/98
@@ -262,7 +262,7 @@ static void W_CoalesceMarkedResource(const char *start_marker,
 
   free(marked);                                   // free marked list
 
-  numlumps = num_unmarked + num_marked;           // new total number of lumps
+  numlumps = (int)(num_unmarked + num_marked);    // new total number of lumps
 
   if (mark_end)                                   // add end marker
     {
