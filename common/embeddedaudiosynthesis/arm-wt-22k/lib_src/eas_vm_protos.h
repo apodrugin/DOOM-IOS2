@@ -271,7 +271,7 @@ void VMStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_U8
  * failure - otherwise
  *----------------------------------------------------------------------------
 */
-EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_INT *pVoiceNumber, EAS_I32 lowVoice, EAS_I32 highVoice);
+EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_I32 *pVoiceNumber, EAS_I32 lowVoice, EAS_I32 highVoice);
 
 /*----------------------------------------------------------------------------
  * VMStealVoice()
@@ -301,7 +301,7 @@ EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_INT *pVoiceNumber, 
  * EAS_RESULT EAS_SUCCESS - always successful
  *----------------------------------------------------------------------------
 */
-EAS_RESULT VMStealVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_INT *pVoiceNumber, EAS_U8 channel, EAS_U8 note, EAS_I32 lowVoice, EAS_I32 highVoice);
+EAS_RESULT VMStealVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_I32 *pVoiceNumber, EAS_U8 channel, EAS_U8 note, EAS_I32 lowVoice, EAS_I32 highVoice);
 
 /*----------------------------------------------------------------------------
  * VMAddSamples()

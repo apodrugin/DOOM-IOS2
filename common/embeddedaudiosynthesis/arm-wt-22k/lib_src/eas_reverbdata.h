@@ -387,7 +387,7 @@ typedef struct
  *
  *----------------------------------------------------------------------------
 */
-EAS_RESULT ReverbUpdateXfade(S_REVERB_OBJECT* pReverbData, EAS_INT nNumSamplesToAdd);
+EAS_RESULT ReverbUpdateXfade(S_REVERB_OBJECT* pReverbData, EAS_I32 nNumSamplesToAdd);
 
 /*----------------------------------------------------------------------------
  * ReverbCalculateNoise
@@ -447,7 +447,7 @@ EAS_RESULT ReverbCalculateSinCos(EAS_I16 nPhase, EAS_I16 *pnSin, EAS_I16 *pnCos)
  *
  *----------------------------------------------------------------------------
 */
-EAS_RESULT Reverb(S_REVERB_OBJECT* pReverbData, EAS_INT nNumSamplesToAdd, EAS_PCM *pOutputBuffer, EAS_PCM *pInputBuffer);
+EAS_RESULT Reverb(S_REVERB_OBJECT* pReverbData, EAS_I32 nNumSamplesToAdd, EAS_PCM *pOutputBuffer, EAS_PCM *pInputBuffer);
 
 /*----------------------------------------------------------------------------
  * ReverbReadInPresets()

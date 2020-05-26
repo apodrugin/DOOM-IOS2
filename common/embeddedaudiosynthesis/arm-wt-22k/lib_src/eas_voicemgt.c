@@ -141,7 +141,7 @@ EAS_INLINE const S_REGION* GetRegionPtr (S_SYNTH *pSynth, EAS_U16 regionIndex)
 }
 
 /*lint -esym(715, voiceNum) used in some implementation */
-EAS_INLINE const S_SYNTH_INTERFACE* GetSynthPtr (EAS_INT voiceNum)
+EAS_INLINE const S_SYNTH_INTERFACE* GetSynthPtr (EAS_I32 voiceNum)
 {
 #if defined(_HYBRID_SYNTH)
     if (voiceNum < NUM_PRIMARY_VOICES)
@@ -153,7 +153,7 @@ EAS_INLINE const S_SYNTH_INTERFACE* GetSynthPtr (EAS_INT voiceNum)
 #endif
 }
 
-EAS_INLINE EAS_INT GetAdjustedVoiceNum (EAS_INT voiceNum)
+EAS_INLINE EAS_I32 GetAdjustedVoiceNum (EAS_I32 voiceNum)
 {
 #if defined(_HYBRID_SYNTH)
     if (voiceNum >= NUM_PRIMARY_VOICES)
@@ -1534,8 +1534,8 @@ void VMCheckKeyGroup (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U16 keyGroup,
 */
 EAS_BOOL VMCheckPolyphonyLimiting (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_U8 note, EAS_U8 velocity, EAS_U16 regionIndex, EAS_I32 lowVoice, EAS_I32 highVoice)
 {
-    EAS_INT voiceNum;
-    EAS_INT oldestVoiceNum;
+    EAS_I32 voiceNum;
+    EAS_I32 oldestVoiceNum;
     EAS_INT numVoicesPlayingNote;
     EAS_U16 age;
     EAS_U16 oldestNoteAge;
@@ -1611,7 +1611,7 @@ void VMStartVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_
 {
     const S_REGION *pRegion;
     S_SYNTH_CHANNEL *pChannel;
-    EAS_INT voiceNum;
+    EAS_I32 voiceNum;
     EAS_INT maxSynthPoly;
     EAS_I32 lowVoice, highVoice;
     EAS_U16 keyGroup;
@@ -1957,9 +1957,9 @@ void VMStopNote (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_U8 channel, EAS_U8
  * failure - otherwise
  *----------------------------------------------------------------------------
 */
-EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_INT *pVoiceNumber, EAS_I32 lowVoice, EAS_I32 highVoice)
+EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_I32 *pVoiceNumber, EAS_I32 lowVoice, EAS_I32 highVoice)
 {
-    EAS_INT voiceNum;
+    EAS_I32 voiceNum;
 
     /* Check each voice to see if it has been assigned to a synth channel */
     for (voiceNum = lowVoice; voiceNum <= highVoice; voiceNum++)
@@ -2010,12 +2010,12 @@ EAS_RESULT VMFindAvailableVoice (S_VOICE_MGR *pVoiceMgr, EAS_INT *pVoiceNumber, 
  * EAS_RESULT EAS_SUCCESS - always successful
  *----------------------------------------------------------------------------
 */
-EAS_RESULT VMStealVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_INT *pVoiceNumber, EAS_U8 channel, EAS_U8 note, EAS_I32 lowVoice, EAS_I32 highVoice)
+EAS_RESULT VMStealVoice (S_VOICE_MGR *pVoiceMgr, S_SYNTH *pSynth, EAS_I32 *pVoiceNumber, EAS_U8 channel, EAS_U8 note, EAS_I32 lowVoice, EAS_I32 highVoice)
 {
     S_SYNTH_VOICE *pCurrVoice;
     S_SYNTH *pCurrSynth;
-    EAS_INT voiceNum;
-    EAS_INT bestCandidate;
+    EAS_I32 voiceNum;
+    EAS_I32 bestCandidate;
     EAS_U8 currChannel;
     EAS_U8 currNote;
     EAS_I32 bestPriority;

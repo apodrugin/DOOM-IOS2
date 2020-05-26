@@ -325,7 +325,7 @@ static void ReverbProcess(EAS_VOID_PTR pInstData, EAS_PCM *pSrc, EAS_PCM *pDst, 
  *
  *----------------------------------------------------------------------------
 */
-EAS_RESULT ReverbUpdateXfade(S_REVERB_OBJECT *pReverbData, EAS_INT nNumSamplesToAdd)
+EAS_RESULT ReverbUpdateXfade(S_REVERB_OBJECT *pReverbData, EAS_I32 nNumSamplesToAdd)
 {
     EAS_U16 nOffset;
     EAS_I16 tempCos;
@@ -522,7 +522,7 @@ EAS_RESULT ReverbCalculateSinCos(EAS_I16 nPhase, EAS_I16 *pnSin, EAS_I16 *pnCos)
  *
  *----------------------------------------------------------------------------
 */
-EAS_RESULT Reverb(S_REVERB_OBJECT *pReverbData, EAS_INT nNumSamplesToAdd, EAS_PCM *pOutputBuffer, EAS_PCM *pInputBuffer)
+EAS_RESULT Reverb(S_REVERB_OBJECT *pReverbData, EAS_I32 nNumSamplesToAdd, EAS_PCM *pOutputBuffer, EAS_PCM *pInputBuffer)
 {
     EAS_I32 i;
     EAS_I32 nDelayOut;

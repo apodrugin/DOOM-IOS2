@@ -117,7 +117,7 @@ EAS_I32 EAS_Calculate2toX (EAS_I32 nCents)
 */
 EAS_U16 EAS_LogToLinear16 (EAS_I32 nGain)
 {
-    EAS_INT nExp;
+    EAS_I32 nExp;
     EAS_U16 nTemp;
 
     /* bias to positive */
@@ -154,7 +154,7 @@ EAS_U16 EAS_LogToLinear16 (EAS_I32 nGain)
  * Returns a 16-bit linear value
  *----------------------------------------------------------------------------
 */
-EAS_I16 EAS_VolumeToGain (EAS_INT volume)
+EAS_I16 EAS_VolumeToGain (EAS_I32 volume)
 {
     /* check for limits */
     if (volume <= 0)

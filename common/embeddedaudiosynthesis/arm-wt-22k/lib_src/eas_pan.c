@@ -60,8 +60,8 @@
 */
 void EAS_CalcPanControl (EAS_INT pan, EAS_I16 *pGainLeft, EAS_I16 *pGainRight)
 {
-    EAS_INT temp;
-    EAS_INT netAngle;
+    long temp;
+    long netAngle;
 
     /* impose hard limit */
     if (pan < -63)

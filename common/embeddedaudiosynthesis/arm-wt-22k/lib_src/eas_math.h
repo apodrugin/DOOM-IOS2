@@ -374,7 +374,7 @@ EAS_U16 EAS_LogToLinear16 (EAS_I32 nGain);
  * Returns a 16-bit linear value
  *----------------------------------------------------------------------------
 */
-EAS_I16 EAS_VolumeToGain (EAS_INT volume);
+EAS_I16 EAS_VolumeToGain (EAS_I32 volume);
 
 /*----------------------------------------------------------------------------
  * EAS_fsqrt()
