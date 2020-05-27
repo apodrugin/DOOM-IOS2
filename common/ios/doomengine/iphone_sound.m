@@ -237,7 +237,7 @@ int I_GetSfxLumpNum (sfxinfo_t *sfx) {
 // volume ranges 0 - 64
 // seperation tanges is 128 straight ahead, 0 = all left ear, 255 = all right ear
 // pitch centers around 128
-int I_StartSound(int sfx_id, int channel, int vol, int sep, int pitch, int priority) {
+long I_StartSound(int sfx_id, int channel, int vol, int sep, int pitch, int priority) {
 
 	sfxinfo_t *dsfx = &S_sfx[sfx_id];
 	
@@ -263,7 +263,7 @@ int I_StartSound(int sfx_id, int channel, int vol, int sep, int pitch, int prior
 	alSourcef( ch->sourceName, AL_PITCH, pitch / 128.0f );
 	alSourcePlay( ch->sourceName );
 	
-	return (int)ch;
+	return ch;
 }
 
 // Stops a sound channel.
