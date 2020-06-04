@@ -46,7 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Memory management -
 
 - (void)dealloc {
-    [super dealloc];
     [self stopListening];
 }
 

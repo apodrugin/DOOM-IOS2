@@ -91,7 +91,6 @@ CAEAGLLayer *eaglLayer;
 	assert( context );
 	
 	if ( ![EAGLContext setCurrentContext:context]) {
-		[self release];
 		return;
 	}        
     
@@ -268,10 +267,8 @@ CAEAGLLayer *eaglLayer;
 			// takes a long time
 			// iphoneActivateConsole();
 			
-			textField = [UITextField alloc];
-			[textField initWithFrame:CGRectMake( 0, 0, 20, 20 ) ];
+			textField = [[UITextField alloc] initWithFrame:CGRectMake( 0, 0, 20, 20 ) ];
 			[self addSubview:textField];
-			[textField release];
 			textField.hidden = true;
 			textField.delegate = self;
 			textField.autocapitalizationType = UITextAutocapitalizationTypeNone;

@@ -68,7 +68,6 @@ static bool inTransition = false;
         // Create the OpenGL View.
         EAGLView *glView = [[EAGLView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
         self.view = glView;
-        [glView release];
         
         
         // Setup the Display Link
@@ -112,15 +111,6 @@ supportedInterfaceOrientations
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-}
-
-/*
- ========================
- dealloc
- ========================
- */
-- (void)dealloc {
-    [super dealloc];
 }
 
 /*

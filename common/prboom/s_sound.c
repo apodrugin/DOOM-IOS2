@@ -532,13 +532,6 @@ void S_ChangeMusic(int musicnum, int looping)
     return;
 #endif
 
-/*	
-#ifdef IPHONE
-	extern void iphonePlayMusic( const char *name );
-	iphonePlayMusic( music->name );
-	
-#else
-*/
   // shutdown old music
   S_StopMusic();
 
@@ -561,7 +554,6 @@ void S_ChangeMusic(int musicnum, int looping)
       if ( music_filename[0] != '\0' )
         {
           music_file_failed = I_RegisterMusic(music_filename, music);
-          free(music_filename);
         }
     }
 
@@ -576,7 +568,6 @@ void S_ChangeMusic(int musicnum, int looping)
 
   // play it
   I_PlaySong(music->handle, looping);
-//#endif
 
   mus_playing = music;
 }

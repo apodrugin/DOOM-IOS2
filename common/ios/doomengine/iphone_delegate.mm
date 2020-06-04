@@ -59,7 +59,7 @@ const static float ACCELEROMETER_UPDATE_INTERVAL = 1.0f / FRAME_HERTZ;
 	hasPushedGLView = NO;
     
     // Create the window programmatically instead of loading from a nib file.
-	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     // Disable Screen Dimming.
     [[ UIApplication sharedApplication] setIdleTimerDisabled: YES ];
@@ -150,16 +150,6 @@ const static float ACCELEROMETER_UPDATE_INTERVAL = 1.0f / FRAME_HERTZ;
 	Com_Printf( "applicationDidReceiveMemoryWarning\n" );
 }
 
-
-/*
- ========================
- dealloc
- ========================
- */
-- (void)dealloc {
-	[window release];
-	[super dealloc];
-}
 
 /*
  ========================

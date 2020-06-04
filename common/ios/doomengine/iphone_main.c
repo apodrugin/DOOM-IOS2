@@ -385,8 +385,8 @@ void iphoneStartup() {
 	Cmd_ExecuteFile( va( "%s/config.cfg", SysIphoneGetDocDir() ) );
 	
 	// start the intro music if it wasn't disabled with the music cvar
-	iphonePlayMusic( "intro" );
-//	iphonePlayMusic( "e1m1" );
+	iphonePlayMusic( "intro", false );
+//	iphonePlayMusic( "e1m1", false );
 	
 	// these should get overwritten by the config loading
 	memset( &playState, 0, sizeof( playState ) );

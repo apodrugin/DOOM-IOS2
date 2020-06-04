@@ -28,8 +28,10 @@
 		4333CCE80F5CC23E00AE2B6F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4333CCE70F5CC23E00AE2B6F /* AudioToolbox.framework */; };
 		4364BF3F0F5CB25900F29317 /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4364BF3E0F5CB25900F29317 /* dist.plist */; };
 		43E8D4E00F51B48B003F09B2 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43E8D4DF0F51B48B003F09B2 /* OpenAL.framework */; };
+		6D08BFC32481A6610066D313 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D08BFC22481A6610066D313 /* CoreMIDI.framework */; };
 		6D49D126247C26E100518029 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D49D125247C26E100518029 /* AVFoundation.framework */; };
 		6D49D1B5247C59CA00518029 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D49D1B4247C59CA00518029 /* CoreMotion.framework */; };
+		6DA5A03A24877FA900F7D217 /* e1m1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6D08BFC62482586D0066D313 /* e1m1.mp3 */; };
 		720EBBAE0F82E0BB003F989A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720EBBAD0F82E0BB003F989A /* QuartzCore.framework */; };
 		C8012E5114B5122700B0E213 /* MainMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C8012E4F14B5122700B0E213 /* MainMenuViewController.mm */; };
 		C8012E5214B5122700B0E213 /* MainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8012E5014B5122700B0E213 /* MainMenuView.xib */; };
@@ -104,6 +106,8 @@
 		434669A30F8D08C000EA7D6D /* doom_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = doom_Prefix.pch; sourceTree = "<group>"; };
 		4364BF3E0F5CB25900F29317 /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		43E8D4DF0F51B48B003F09B2 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = /System/Library/Frameworks/OpenAL.framework; sourceTree = "<absolute>"; };
+		6D08BFC22481A6610066D313 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+		6D08BFC62482586D0066D313 /* e1m1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = e1m1.mp3; path = ../../e1m1.mp3; sourceTree = "<group>"; };
 		6D49D125247C26E100518029 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6D49D1B4247C59CA00518029 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		720EBBAD0F82E0BB003F989A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
@@ -154,6 +158,7 @@
 				1391CE171882E5F40049671C /* libprboom.a in Frameworks */,
 				1391CE151882E5A30049671C /* libidmobilelib.a in Frameworks */,
 				3DF31FA3148C336400C66CD7 /* libdoomengine.a in Frameworks */,
+				6D08BFC32481A6610066D313 /* CoreMIDI.framework in Frameworks */,
 				6D49D1B5247C59CA00518029 /* CoreMotion.framework in Frameworks */,
 				6D49D126247C26E100518029 /* AVFoundation.framework in Frameworks */,
 				13E3CC5F17F236840075D40A /* GameKit.framework in Frameworks */,
@@ -218,6 +223,7 @@
 		29B97317FDCFA39411CA2CEA /* App Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6D08BFC62482586D0066D313 /* e1m1.mp3 */,
 				138FC9C617F2165D00D94C5F /* base.iPack */,
 				138FC9C717F2165D00D94C5F /* doom.wad */,
 				138FC9C817F2165D00D94C5F /* prboom.wad */,
@@ -230,6 +236,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D08BFC22481A6610066D313 /* CoreMIDI.framework */,
 				6D49D1B4247C59CA00518029 /* CoreMotion.framework */,
 				6D49D125247C26E100518029 /* AVFoundation.framework */,
 				1391CE161882E5F40049671C /* libprboom.a */,
@@ -393,7 +400,7 @@
 				LastUpgradeCheck = 1140;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
-						DevelopmentTeam = VH3C8HCNLH;
+						DevelopmentTeam = 3L68KQB4HG;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
 								enabled = 1;
@@ -466,6 +473,7 @@
 				C8012E8314B6709C00B0E213 /* SettingsMenuView.xib in Resources */,
 				C8012E8814B6722B00B0E213 /* LegalMenuView.xib in Resources */,
 				C8012E8E14B6750D00B0E213 /* MissionMenuView.xib in Resources */,
+				6DA5A03A24877FA900F7D217 /* e1m1.mp3 in Resources */,
 				132AC2E41802F15C00884E11 /* MissionMenuViewi5.xib in Resources */,
 				132AC2E61802F15C00884E11 /* SettingsMenuViewi5.xib in Resources */,
 				C8DB8A5914BB88AC0006467C /* ControlsMenuView~ipad.xib in Resources */,
@@ -535,6 +543,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3L68KQB4HG;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -548,10 +557,11 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.idsoftware.Doom;
+				PRODUCT_BUNDLE_IDENTIFIER = com.readdle.PDFExpert5;
 				PROFILE_PREFIX = com.idsoftware;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "DEV PDF Expert 5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../../common/ios/doomengine ../../../common ../../../common/idmobilelib";
@@ -565,6 +575,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 3L68KQB4HG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = doom_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -575,10 +586,11 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.idsoftware.Doom;
+				PRODUCT_BUNDLE_IDENTIFIER = com.readdle.PDFExpert5;
 				PROFILE_PREFIX = com.idsoftware;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "DEV PDF Expert 5";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../../common/ios/doomengine ../../../common ../../../common/idmobilelib";
@@ -660,6 +672,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEVELOPMENT_TEAM = 3L68KQB4HG;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = doom_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -670,10 +683,11 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.idsoftware.Doom;
+				PRODUCT_BUNDLE_IDENTIFIER = com.readdle.PDFExpert5;
 				PROFILE_PREFIX = com.idsoftware;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = "DEV Wildcard";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "../../../common/ios/doomengine ../../../common ../../../common/idmobilelib";
@@ -906,7 +920,7 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.idsoftware.Doom;
+				PRODUCT_BUNDLE_IDENTIFIER = com.readdle.PDFExpert5;
 				PROFILE_PREFIX = com.idsoftware;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CF005E47-190F-43B8-B89D-59AD4EF04B31";

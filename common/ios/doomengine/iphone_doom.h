@@ -536,7 +536,7 @@ void iphoneIntermission( wbstartstruct_t* wbstartstruct );
 void iphoneStartLevel();
 void iphoneStartMusic();
 void iphoneStopMusic();
-void iphonePlayMusic( const char *name );
+void iphonePlayMusic( const char *name, bool shouldLoop );
 void iphonePauseMusic();
 void iphoneResumeMusic();
 void iphoneDoomStartup( const char * iwad, const char * pwad );

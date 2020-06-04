@@ -397,10 +397,6 @@ boolean I_AnySoundStillPlaying(void)
 
 static void I_UpdateSound(void *unused, uint8_t *stream, int len)
 {
-#ifdef IPHONE
-	return;
-#endif
-
 #ifndef IPHONE
   // Mix current sound data.
   // Data, from raw sound, for right and left.
@@ -764,7 +760,10 @@ int I_RegisterSong(const void *data, size_t len)
   }
   fclose(midfile);
 
-  music[0] = Mix_LoadMUS(music_tmp);
+  if (NULL != music[0]) {
+    free(music[0]);
+  }
+  music[0] = Mix_LoadMusic(IDAudioTypeMIDI, music_tmp);
   if ( music[0] == NULL ) {
     lprintf(LO_ERROR,"Couldn't load MIDI from %s: %s\n", music_tmp, Mix_GetError());
   }
@@ -779,7 +778,11 @@ int I_RegisterMusic( const char* filename, musicinfo_t *song )
 #ifdef HAVE_MIXER
   if (!filename) return 1;
   if (!song) return 1;
-  music[0] = Mix_LoadMUS(filename);
+    
+  if (NULL != music[0]) {
+    free(music[0]);
+  }
+  music[0] = Mix_LoadMusic(IDAudioTypeHighQuality, filename);
   if (music[0] == NULL)
     {
       lprintf(LO_WARN,"Couldn't load music from %s: %s\nAttempting to load default MIDI music.\n", filename, Mix_GetError());
